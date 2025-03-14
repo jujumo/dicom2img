@@ -12,7 +12,8 @@ dependencies = [
 ] # project  dependencies
 
 [project.scripts]
-totem="dicom2img.dicom2img:dicom2img_cli"
+dicom="dicom2img.dicom:dicom_cli"
+dicomdir="dicom2img.dicomdir:dicomdir_cli"
 
 [tool.setuptools]
 packages = ["dicom2img"]
