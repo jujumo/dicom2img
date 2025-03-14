@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dicom2img"
+version="1.0.0"
+dependencies = [
+    "jsonargparse", "rich",
+    "numpy==1.26", "matplotlib",
+    "pydicom", "pillow"
+] # project  dependencies
+
+[project.scripts]
+totem="dicom2img.dicom2img:dicom2img_cli"
+
+[tool.setuptools]
+packages = ["dicom2img"]

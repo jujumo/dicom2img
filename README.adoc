@@ -1,0 +1,11 @@
+= dicom2img
+
+Yet another DICOM reader/converter.
+
+== install
+
+----
+$> git clone https://github.com/jujumo/dicom2img.git
+$> cd dicom2img
+$> pip install .
+----

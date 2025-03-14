@@ -1,0 +1,7 @@
+*.stl
+.idea
+
+__pycache__
+.venv
+venv
+dicom2img.egg-info
