@@ -52,12 +52,17 @@ def np2img(
     if gain != 1:
         arr = arr.astype(np.uint32) * np.iinfo(dtype).max // np.max(arr)
         arr = arr.astype(dtype)
+
     # then convert to the proper data type
     if arr.dtype != dtype:
         in_max = np.iinfo(arr.dtype).max
         out_max = np.iinfo(dtype).max
         arr = arr.astype(dtype) * in_max / out_max
+
+    if len(arr.shape) == 3:  # cant make 16 bit 3 channels
+        arr = arr.astype(np.uint8)
     img = Image.fromarray(arr)
+
     return img
 
 

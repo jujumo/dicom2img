@@ -127,11 +127,13 @@ def dicomdir2files(
             sequences[seq_id].append(arr)
         # then save each voxel grid
         for seq_id, sequence in sequences.items():
-            voxel_grid = np.stack(sequence, axis=2)
-            voxel_filename = f'{seq_id:03}' + file_ext
-            voxel_filepath = path.join(output_dirpath, voxel_filename)
-            np.save(voxel_filepath, voxel_grid)
-
+            try:
+                voxel_grid = np.stack(sequence, axis=2)
+                voxel_filename = f'{seq_id:03}' + file_ext
+                voxel_filepath = path.join(output_dirpath, voxel_filename)
+                np.save(voxel_filepath, voxel_grid)
+            except Exception as e:
+                print(f'{e=}')
 
 def dicomdir_cli():
     CLI(dicomdir2files)
