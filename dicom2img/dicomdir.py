@@ -86,7 +86,7 @@ def dicomdir2files(
         dicomdir_filepath: str,
         output_dirpath: str,
         itype: ImageType = ImageType.PNG,
-        normalize: bool = False,
+        gain: float = 1.0,
         verbose: bool = False
 ):
     """
@@ -95,6 +95,7 @@ def dicomdir2files(
     :param dicomdir_filepath: input path to the DICOMDIR file.
     :param output_dirpath: output path, where to save exported images.
     :param itype: type of the output export image: png or numpy npy.
+    :param gain: gain to apply to values [1] means no gain. -1 means auto gain.
     """
 
     os.makedirs(output_dirpath, exist_ok=True)
@@ -114,7 +115,7 @@ def dicomdir2files(
         for record, arr in track(layers, total=len(records)):
             image_filename = f'{record.series_number:03}_{record.instance_number:05}_{record.referenced_file_id[-1]}' + file_ext
             image_filepath = path.join(output_dirpath, image_filename)
-            img = np2img(arr, itype=itype, normalize=normalize)
+            img = np2img(arr, itype=itype, gain=gain)
             img.save(image_filepath)
 
     # for npy, aggregate sequences into voxel grid

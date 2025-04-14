@@ -40,13 +40,16 @@ def dicom2np(
 def np2img(
         arr: np.ndarray,
         itype: ImageType = ImageType.PNG,
-        normalize: bool = False
+        gain: float = 1.0
 ):
     """ converts the numpy layer to an image, given the file format and depth. """
     # expect an array with uint12b coded on a uint16b
     dtype = IMAGE_DTYPE[itype]
     # for visualization, normalize
-    if normalize:
+    if gain < 0:
+        gain = np.iinfo(dtype).max // np.max(arr)
+
+    if gain != 1:
         arr = arr.astype(np.uint32) * np.iinfo(dtype).max // np.max(arr)
         arr = arr.astype(dtype)
     # then convert to the proper data type
